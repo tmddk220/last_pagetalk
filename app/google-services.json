@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "394232644601",
+    "project_id": "mysolelife-c1daa",
+    "storage_bucket": "mysolelife-c1daa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394232644601:android:2142106e0b722988937328",
+        "android_client_info": {
+          "package_name": "com.bokchi.mysolelife"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAyxgPOq7MM6VsYS_dNFKv48JloDe-gP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

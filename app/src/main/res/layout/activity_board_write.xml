@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".board.BoardWriteActivity"
+        android:orientation="vertical">
+
+        //스크롤 뷰
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+
+                    <TextView
+                        android:text="글쓰기 페이지"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#000000"/>
+
+                //밑줄 제거 android:background="@android:color/transparent"
+
+                <ImageView
+                    android:id="@+id/imageArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="206dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#DAD9D9"
+                    android:src="@drawable/iconscamera" />
+
+                <EditText
+                    android:id="@+id/titleArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:hint="책의 제목을 입력하세요" />
+
+                <EditText
+                    android:id="@+id/authorArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:hint="책의 저자를 입력하세요" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#000000"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="  장르"
+                    android:textSize="8pt" />
+
+                //장르 라디오버튼
+               /*LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#000000"/>*/
+
+                <LinearLayout
+                    android:id="@+id/genreGroup1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/genre"
+                    app:layout_constraintTop_toBottomOf="@+id/genre">
+
+                    <RadioButton
+                        android:id="@+id/genre1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="에세이 " />
+
+                    <RadioButton
+                        android:id="@+id/genre2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="자기계발 " />
+
+                    <RadioButton
+                        android:id="@+id/genre3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="경제경영 " />
+
+                    <RadioButton
+                        android:id="@+id/genre4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="예술    " />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/genreGroup2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/genre"
+                    app:layout_constraintTop_toBottomOf="@+id/genreGroup1">
+
+                    <RadioButton
+                        android:id="@+id/genre5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="소설   " />
+
+                    <RadioButton
+                        android:id="@+id/genre6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="시   " />
+
+                    <RadioButton
+                        android:id="@+id/genre7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="역사  " />
+
+                    <RadioButton
+                        android:id="@+id/genre8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="인문  " />
+
+                    <RadioButton
+                        android:id="@+id/genre9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="종교" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/genreGroup3"
+                    android:layout_width="464dp"
+                    android:layout_height="31dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@+id/genre"
+                    app:layout_constraintTop_toBottomOf="@+id/genreGroup2">
+
+                    <RadioButton
+                        android:id="@+id/genre10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="자연과학  " />
+
+                    <RadioButton
+                        android:id="@+id/genre11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="사회과학  " />
+
+                    <RadioButton
+                        android:id="@+id/genre12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IT    " />
+
+                    <RadioButton
+                        android:id="@+id/genre13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="청소년  " />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/genreGroup4"
+                    android:layout_width="464dp"
+                    android:layout_height="31dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@+id/genre"
+                    app:layout_constraintTop_toBottomOf="@+id/genreGroup3">
+
+                    <RadioButton
+                        android:id="@+id/genre14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="여행" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="  별점"
+                    android:textSize="8pt" />
+
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="242dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintStart_toEndOf="@+id/ratingstar"
+                    app:layout_constraintTop_toBottomOf="@+id/writeAuhor" />
+
+                <EditText
+                    android:id="@+id/reviewtitleArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:hint="리뷰의 제목을 입력하세요" />
+
+                <EditText
+                    android:id="@+id/contentArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_margin="20dp"
+                    android:background="@android:color/transparent"
+                    android:hint="본문을 입력하세요" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="#000000"/>
+
+                <Button
+                    android:id="@+id/writeBtn"
+                    android:text="입력"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/background_radius_yellow"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>
