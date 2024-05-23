@@ -7,5 +7,5 @@ data class BoardModel (
     val time : String = "",
     val reviewtitle : String = "",
     val author: String = "",
-    val ratin: String=""
+    val rating: Float = 0.0f
 )

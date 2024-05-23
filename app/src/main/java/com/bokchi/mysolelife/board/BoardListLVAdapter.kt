@@ -40,7 +40,7 @@ class BoardListLVAdapter(val boardList : MutableList<BoardModel>) : BaseAdapter(
         val time = view?.findViewById<TextView>(R.id.timeArea)
         val author = view?.findViewById<TextView>(R.id.authorArea)
         val reviewtitle = view?.findViewById<TextView>(R.id.reviewtitleArea)
-        val ratin = view?.findViewById<TextView>(R.id.ratingBar)
+        val rating = view?.findViewById<TextView>(R.id.ratingBar)
 
         if(boardList[position].uid.equals(FBAuth.getUid())) {
             itemLinearLayoutView?.setBackgroundColor(Color.parseColor("#ffa500"))
@@ -51,7 +51,7 @@ class BoardListLVAdapter(val boardList : MutableList<BoardModel>) : BaseAdapter(
         time!!.text = boardList[position].time
         //author!!.text = boardList[position].author
         //reviewtitle!!.text = boardList[position].reviewtitle
-        //ratin!!.text = boardList[position].ratin
+        //ratin!!.text = boardList[position].rating
 
         return view!!
     }

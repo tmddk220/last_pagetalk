@@ -37,15 +37,16 @@ class BoardWriteActivity : AppCompatActivity() {
             val content = binding.contentArea.text.toString()
             val author = binding.authorArea.text.toString()
             val reviewtitle = binding.reviewtitleArea.text.toString()
+            val rating = binding.ratingBar.rating
             //val genre = grnreEidtText.text.toString()
-            //val rating = ratingBar.rating
             val uid = FBAuth.getUid()
             val time = FBAuth.getTime()
 
             Log.d(TAG, title)
             Log.d(TAG, content)
-            Log.d(TAG, author)
+            Log.d(TAG,author)
             Log.d(TAG, reviewtitle)
+            //Log.d(TAG, rating) -> 타입오류
 
             // 파이어베이스 store에 이미지를 저장하고 싶습니다
             // 만약에 내가 게시글을 클릭했을 때, 게시글에 대한 정보를 받아와야 하는데
@@ -56,8 +57,7 @@ class BoardWriteActivity : AppCompatActivity() {
 
             FBRef.boardRef
                 .child(key)
-                .setValue(BoardModel(title, author, reviewtitle, content, uid, time))
-
+                .setValue(BoardModel(title, content, uid, time, reviewtitle, author, rating))
             Toast.makeText(this, "게시글 입력 완료", Toast.LENGTH_LONG).show()
 
             if(isImageUpload == true) {
