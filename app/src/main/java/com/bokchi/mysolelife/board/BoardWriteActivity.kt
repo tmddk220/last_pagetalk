@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bokchi.mysolelife.R
@@ -24,6 +25,8 @@ class BoardWriteActivity : AppCompatActivity() {
     private val TAG = BoardWriteActivity::class.java.simpleName
 
     private var isImageUpload = false
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -71,12 +74,12 @@ class BoardWriteActivity : AppCompatActivity() {
 
         binding.imageArea.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+
             startActivityForResult(gallery, 100)
             isImageUpload = true
         }
 
     }
-
     private fun imageUpload(key : String){
         // Get the data from an ImageView as bytes
 
@@ -109,6 +112,8 @@ class BoardWriteActivity : AppCompatActivity() {
         if(resultCode == RESULT_OK && requestCode == 100) {
             binding.imageArea.setImageURI(data?.data)
         }
+
+
 
     }
 }
