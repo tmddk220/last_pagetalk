@@ -10,21 +10,22 @@ import com.bokchi.mysolelife.R
 import com.bokchi.mysolelife.databinding.ActivityJoinBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.database.ktx.database
 
 class JoinActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-
-    private lateinit var binding : ActivityJoinBinding
+    private lateinit var binding: ActivityJoinBinding
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
 
         auth = Firebase.auth
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_join)
+        database = Firebase.database.reference
 
         binding.joinBtn.setOnClickListener {
 
@@ -33,6 +34,9 @@ class JoinActivity : AppCompatActivity() {
             val email = binding.emailArea.text.toString()
             val password1 = binding.passwordArea1.text.toString()
             val password2 = binding.passwordArea2.text.toString()
+            val nickname = binding.nicknameArea.text.toString()
+            val birthdate = binding.birthdateArea.text.toString()
+            val phone = binding.phoneArea.text.toString()
 
             // 저기 값이 비어있는지 확인
             if(email.isEmpty()) {
@@ -63,32 +67,27 @@ class JoinActivity : AppCompatActivity() {
             }
 
             if(isGoToJoin) {
-
                 auth.createUserWithEmailAndPassword(email, password1).addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "성공", Toast.LENGTH_LONG).show()
+                        // 사용자 정보 저장
+                        val userId = auth.currentUser?.uid
+                        if (userId != null) {
+                            database.child("users").child(userId).apply {
+                                child("nickname").setValue(nickname)
+                                child("birthdate").setValue(birthdate)
+                                child("phone").setValue(phone)
+                            }
+                        }
 
+                        Toast.makeText(this, "성공", Toast.LENGTH_LONG).show()
                         val intent = Intent(this, MainActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
-
-
                     } else {
                         Toast.makeText(this, "실패", Toast.LENGTH_LONG).show()
                     }
                 }
-
             }
-
-
-
         }
-
-
-
-
-
-
-
     }
 }

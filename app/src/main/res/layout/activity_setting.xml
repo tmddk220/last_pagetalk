@@ -7,15 +7,39 @@
     android:layout_height="match_parent"
     tools:context=".setting.SettingActivity">
 
-    <Button
-        android:id="@+id/logoutBtn"
-        android:text="LOGOUT"
-        android:background="@drawable/background_radius_yellow"
+    <TextView
+        android:id="@+id/nicknameText"
+        android:text="닉네임: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/birthdateText"
+        android:text="생년월일: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nicknameText" />
+
+    <TextView
+        android:id="@+id/phoneText"
+        android:text="휴대폰 번호: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthdateText" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_radius_yellow"
+        android:text="LOGOUT"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/phoneText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
