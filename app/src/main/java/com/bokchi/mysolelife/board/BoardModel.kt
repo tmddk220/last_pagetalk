@@ -1,5 +1,7 @@
 package com.bokchi.mysolelife.board
 
+import com.bokchi.mysolelife.utils.FBRef
+
 data class BoardModel (
     val title : String = "",
     val content : String = "",

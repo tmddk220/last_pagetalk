@@ -25,80 +25,72 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.lang.Exception
 
+// BoardInsideActivity 클래스 선언
 class BoardInsideActivity : AppCompatActivity() {
 
-    private val TAG = BoardInsideActivity::class.java.simpleName
-
-    private lateinit var binding : ActivityBoardInsideBinding
-
-    private lateinit var key:String
-
-    private val commentDataList = mutableListOf<CommentModel>()
-
-    private lateinit var commentAdapter : CommentLVAdapter
+    private val TAG = BoardInsideActivity::class.java.simpleName // 로그 태그
+    private lateinit var binding: ActivityBoardInsideBinding // ViewBinding 객체
+    private lateinit var key: String // 게시글 키
+    private val commentDataList = mutableListOf<CommentModel>() // 댓글 데이터 리스트
+    private lateinit var commentAdapter: CommentLVAdapter // 댓글 리스트 뷰 어댑터
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
+        // ViewBinding 설정
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_inside)
 
+        // 설정 아이콘 클릭 리스너 설정
         binding.boardSettingIcon.setOnClickListener {
             showDialog()
         }
 
-        // 두번째 방법
+        // 인텐트로부터 게시글 키를 가져옴
         key = intent.getStringExtra("key").toString()
-        getBoardData(key)
-        getImageData(key)
+        getBoardData(key) // 게시글 데이터 가져오기
+        getImageData(key) // 게시글 이미지 가져오기
 
-
+        // 댓글 버튼 클릭 리스너 설정
         binding.commentBtn.setOnClickListener {
             insertComment(key)
         }
 
-        getCommentData(key)
+        getCommentData(key) // 댓글 데이터 가져오기
 
+        // 댓글 리스트 뷰 어댑터 설정
         commentAdapter = CommentLVAdapter(commentDataList)
         binding.commentLV.adapter = commentAdapter
 
     }
 
-    fun getCommentData(key : String){
-
+    // 댓글 데이터 가져오기
+    fun getCommentData(key: String) {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                commentDataList.clear()
+                commentDataList.clear() // 기존 댓글 데이터 삭제
 
+                // Firebase로부터 댓글 데이터를 가져옴
                 for (dataModel in dataSnapshot.children) {
-
                     val item = dataModel.getValue(CommentModel::class.java)
                     commentDataList.add(item!!)
                 }
 
-                commentAdapter.notifyDataSetChanged()
-
+                commentAdapter.notifyDataSetChanged() // 어댑터에 데이터 변경 통보
 
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
+                // 데이터 가져오기 실패 시 로그 메시지 출력
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
         }
         FBRef.commentRef.child(key).addValueEventListener(postListener)
-
-
     }
 
-    fun insertComment(key : String){
-        // comment
-        //   - BoardKey
-        //        - CommentKey
-        //            - CommentData
-        //            - CommentData
-        //            - CommentData
+    // 댓글 입력하기
+    fun insertComment(key: String) {
         FBRef.commentRef
             .child(key)
             .push()
@@ -110,12 +102,11 @@ class BoardInsideActivity : AppCompatActivity() {
             )
 
         Toast.makeText(this, "댓글 입력 완료", Toast.LENGTH_SHORT).show()
-        binding.commentArea.setText("")
-
+        binding.commentArea.setText("") // 댓글 입력창 초기화
     }
 
-    private fun showDialog(){
-
+    // 게시글 수정/삭제 다이얼로그 보여주기
+    private fun showDialog() {
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
         val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
@@ -126,54 +117,38 @@ class BoardInsideActivity : AppCompatActivity() {
             Toast.makeText(this, "수정 버튼을 눌렀습니다", Toast.LENGTH_LONG).show()
 
             val intent = Intent(this, BoardEditActivity::class.java)
-            intent.putExtra("key",key)
+            intent.putExtra("key", key)
             startActivity(intent)
         }
 
         alertDialog.findViewById<Button>(R.id.removeBtn)?.setOnClickListener {
-
             FBRef.boardRef.child(key).removeValue()
             Toast.makeText(this, "삭제완료", Toast.LENGTH_LONG).show()
             finish()
-
         }
-
-
-
     }
 
-    private fun getImageData(key : String){
-
-        // Reference to an image file in Cloud Storage
-        val storageReference = Firebase.storage.reference.child(key + ".png")
-
-        // ImageView in your Activity
-        val imageViewFromFB = binding.getImageArea
+    // 게시글 이미지 가져오기
+    private fun getImageData(key: String) {
+        val storageReference = Firebase.storage.reference.child(key + ".png") // 이미지 파일 참조
+        val imageViewFromFB = binding.getImageArea // 이미지 뷰
 
         storageReference.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
-            if(task.isSuccessful) {
-
+            if (task.isSuccessful) {
                 Glide.with(this)
                     .load(task.result)
                     .into(imageViewFromFB)
-
             } else {
-
-                binding.getImageArea.isVisible = false
+                binding.getImageArea.isVisible = false // 이미지가 없을 경우 이미지 뷰 숨김
             }
         })
-
-
     }
 
-
-    private fun getBoardData(key : String){
-
+    // 게시글 데이터 가져오기
+    private fun getBoardData(key: String) {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
                 try {
-
                     val dataModel = dataSnapshot.getValue(BoardModel::class.java)
                     Log.d(TAG, dataModel!!.title)
 
@@ -184,32 +159,21 @@ class BoardInsideActivity : AppCompatActivity() {
                     val myUid = FBAuth.getUid()
                     val writerUid = dataModel.uid
 
-                    if(myUid.equals(writerUid)){
+                    if (myUid == writerUid) {
                         Log.d(TAG, "내가 쓴 글")
                         binding.boardSettingIcon.isVisible = true
                     } else {
                         Log.d(TAG, "내가 쓴 글 아님")
                     }
-
-                } catch (e : Exception){
-
+                } catch (e: Exception) {
                     Log.d(TAG, "삭제완료")
-
                 }
-
-
-
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
         }
         FBRef.boardRef.child(key).addValueEventListener(postListener)
-
-
-
     }
-
 }
