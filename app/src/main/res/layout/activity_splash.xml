@@ -8,13 +8,30 @@
     android:background="@color/mainColor"
     tools:context=".SplashActivity">
 
-    <ImageView
+    <TextView
+        android:id="@+id/splash_appname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo"
+        android:text="Pagetalk"
+        android:textColor="@color/white"
+        android:textSize="34dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.441" />
+
+    <TextView
+        android:id="@+id/splash_slogan"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:text="독서를 공유하는 우리들의 공간"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/splash_appname" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
