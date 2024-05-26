@@ -56,9 +56,7 @@ class TipFragment : Fragment() {
             it.findNavController().navigate(R.id.action_tipFragment_to_bookmarkFragment)
         }
 
-        binding.storeTap.setOnClickListener {
-            it.findNavController().navigate(R.id.action_tipFragment_to_storeFragment)
-        }
+
 
         return binding.root
     }

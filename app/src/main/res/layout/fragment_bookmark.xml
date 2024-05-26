@@ -22,7 +22,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="4dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout4">
 
                 <LinearLayout
@@ -47,10 +47,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -59,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@color/white"
-                android:weightSum="5"
+                android:weightSum="4"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <ImageView
@@ -67,35 +63,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_hometap" />
+                    android:src="@drawable/icon_home" />
 
                 <ImageView
                     android:id="@+id/tipTap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_goodtip" />
+                    android:src="@drawable/icon_find" />
 
                 <ImageView
                     android:id="@+id/talkTap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_talk" />
+                    android:src="@drawable/icon_write" />
 
                 <ImageView
                     android:id="@+id/bookmarkTap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_bookmark" />
-
-                <ImageView
-                    android:id="@+id/storeTap"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/bottom_store" />
+                    android:src="@drawable/icon_user" />
 
             </LinearLayout>
 
