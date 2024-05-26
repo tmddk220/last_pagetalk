@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import com.bokchi.mysolelife.R
 import com.bokchi.mysolelife.databinding.ActivityBoardEditBinding
 import com.bokchi.mysolelife.utils.FBAuth
-
 import com.bokchi.mysolelife.utils.FBRef
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
@@ -17,25 +16,17 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import java.lang.Exception
 
 class BoardEditActivity : AppCompatActivity() {
 
-    private lateinit var key:String
-
-    private lateinit var binding : ActivityBoardEditBinding
-
+    private lateinit var key: String
+    private lateinit var binding: ActivityBoardEditBinding
     private val TAG = BoardEditActivity::class.java.simpleName
-
-    private lateinit var writerUid : String
+    private lateinit var writerUid: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_edit)
-
         key = intent.getStringExtra("key").toString()
         getBoardData(key)
         getImageData(key)
@@ -43,69 +34,59 @@ class BoardEditActivity : AppCompatActivity() {
         binding.editBtn.setOnClickListener {
             editBoardData(key)
         }
-
-
     }
 
-    private fun editBoardData(key : String){
-
+    private fun editBoardData(key: String) {
         FBRef.boardRef
             .child(key)
             .setValue(
-                BoardModel(binding.titleArea.text.toString(),
+                BoardModel(
+                    binding.titleArea.text.toString(),
                     binding.contentArea.text.toString(),
-                    binding.authorArea.text.toString(),
-                    binding.reviewtitleArea.text.toString(),
                     writerUid,
-                    FBAuth.getTime())
+                    FBAuth.getTime(),
+                    binding.reviewtitleArea.text.toString(),
+                    binding.authorArea.text.toString(),
+                    binding.ratingBar.rating
+                )
             )
 
         Toast.makeText(this, "수정완료", Toast.LENGTH_LONG).show()
-
         finish()
-
     }
 
-    private fun getImageData(key : String){
-
+    private fun getImageData(key: String) {
         // Reference to an image file in Cloud Storage
-        val storageReference = Firebase.storage.reference.child(key + ".png")
+        val storageReference = Firebase.storage.reference.child("$key.png")
 
         // ImageView in your Activity
         val imageViewFromFB = binding.imageArea
 
         storageReference.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
-            if(task.isSuccessful) {
-
+            if (task.isSuccessful) {
                 Glide.with(this)
                     .load(task.result)
                     .into(imageViewFromFB)
-
-            } else {
-
             }
         })
-
-
     }
 
-    private fun getBoardData(key : String){
-
+    private fun getBoardData(key: String) {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
                 val dataModel = dataSnapshot.getValue(BoardModel::class.java)
-//                Log.d(TAG, dataModel.toString())
-//                Log.d(TAG, dataModel!!.title)
-//                Log.d(TAG, dataModel!!.time)
+                if (dataModel != null) {
+                    Log.d(TAG, dataModel.toString())
+                    Log.d(TAG, dataModel.title)
+                    Log.d(TAG, dataModel.time)
 
-                binding.titleArea.setText(dataModel?.title)
-                binding.contentArea.setText(dataModel?.content)
-                binding.authorArea.setText(dataModel?.author)
-                binding.reviewtitleArea.setText(dataModel?.reviewtitle)
-                writerUid = dataModel!!.uid
-
-
+                    binding.titleArea.setText(dataModel.title)
+                    binding.contentArea.setText(dataModel.content)
+                    binding.authorArea.setText(dataModel.author)
+                    binding.reviewtitleArea.setText(dataModel.reviewtitle)
+                    binding.ratingBar.rating = dataModel.rating
+                    writerUid = dataModel.uid
+                }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -115,13 +96,5 @@ class BoardEditActivity : AppCompatActivity() {
         }
 
         FBRef.boardRef.child(key).addValueEventListener(postListener)
-
-
     }
-
-
-
-
-
-
 }

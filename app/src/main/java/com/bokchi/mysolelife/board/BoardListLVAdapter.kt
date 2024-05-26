@@ -46,8 +46,9 @@ class BoardListLVAdapter(val context: Context, val boardList: MutableList<BoardM
         val time = view?.findViewById<TextView>(R.id.timeArea)
         val image = view?.findViewById<ImageView>(R.id.getImageArea)
 
+        //내가 쓴 글 background color 설정
         if (boardList[position].uid == FBAuth.getUid()) {
-            itemLinearLayoutView?.setBackgroundColor(Color.parseColor("#ffa500"))
+            itemLinearLayoutView?.setBackgroundColor(Color.parseColor("#ffffff"))
         }
 
         title!!.text = boardList[position].title

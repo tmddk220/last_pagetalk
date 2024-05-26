@@ -23,20 +23,26 @@ class CommentLVAdapter(val commentList : MutableList<CommentModel>) : BaseAdapte
         return position.toLong()
     }
 
+    //+댓글 nickname 불러오기
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view = convertView
 
         if (view == null) {
-            view = LayoutInflater.from(parent?.context).inflate(R.layout.board_list_item, parent, false)
+            view = LayoutInflater.from(parent?.context).inflate(R.layout.comment_list_item, parent, false)
         }
 
         val title = view?.findViewById<TextView>(R.id.titleArea)
         val time = view?.findViewById<TextView>(R.id.timeArea)
+        val nickname = view?.findViewById<TextView>(R.id.nicknameText)
 
         title!!.text = commentList[position].commentTitle
         time!!.text = commentList[position].commentCreatedTime
+        //nickname!!.text = commentList[position].commentNickname
 
         return view!!
     }
+
+
+
 
 }
