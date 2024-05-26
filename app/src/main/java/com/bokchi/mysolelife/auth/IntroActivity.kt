@@ -3,9 +3,7 @@ package com.bokchi.mysolelife.auth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.bokchi.mysolelife.MainActivity
 import com.bokchi.mysolelife.R
 import com.bokchi.mysolelife.databinding.ActivityIntroBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -35,7 +33,7 @@ class IntroActivity : AppCompatActivity() {
             val intent = Intent(this, JoinActivity::class.java)
             startActivity(intent)
         }
-
+        /* 비회원 로그인 기능 삭제
         binding.noAccountBtn.setOnClickListener {
             auth.signInAnonymously()
                 .addOnCompleteListener(this) { task ->
@@ -54,6 +52,7 @@ class IntroActivity : AppCompatActivity() {
                     }
                 }
         }
+         */
 
     }
 }
