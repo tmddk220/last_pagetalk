@@ -66,9 +66,10 @@ class TalkFragment : Fragment() {
             startActivity(intent)
         }
 
+        /*homefragment 삭제하면서 주석처리함 (승은)
         binding.homeTap.setOnClickListener {
             it.findNavController().navigate(R.id.action_talkFragment_to_homeFragment)
-        }
+        }*/
 
         binding.tipTap.setOnClickListener {
             it.findNavController().navigate(R.id.action_talkFragment_to_tipFragment)
