@@ -18,7 +18,10 @@
         android:text="삭제버튼"
         android:layout_width="match_parent"
         android:background="@drawable/background_radius_green"
-        android:layout_margin="20dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>

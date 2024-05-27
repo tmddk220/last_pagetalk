@@ -76,8 +76,14 @@ class BoardListLVAdapter(val context: Context, val boardList: MutableList<BoardM
                         .into(imageView!!)
                 }
                 else {
+                    imageView?.setImageResource(R.drawable.iconsbook1) // 이미지 로드 실패 시 에러 이미지 표시
+                    imageView?.isVisible = true
+                }
+                /* 아래 코드로 바꾸면 로딩중 사진 표시 잘됨
+                else {
                     imageView?.isVisible = false
                 }
+                 */
             })
         }
     }
