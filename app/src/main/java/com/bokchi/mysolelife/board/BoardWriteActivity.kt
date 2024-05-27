@@ -31,7 +31,6 @@ class BoardWriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_write)
 
-        //책제목, 저자, 리뷰제목, 본문 변수선언
         binding.writeBtn.setOnClickListener {
 
             val title = binding.titleArea.text.toString()
@@ -39,7 +38,7 @@ class BoardWriteActivity : AppCompatActivity() {
             val author = binding.authorArea.text.toString()
             val reviewtitle = binding.reviewtitleArea.text.toString()
             val rating = binding.ratingBar.rating
-            //val genre = grnreEidtText.text.toString()
+            val genre = findViewById<RadioButton>(selectedRadioButtonId)?.text.toString()
             val uid = FBAuth.getUid()
             val time = FBAuth.getTime()
 
@@ -48,16 +47,13 @@ class BoardWriteActivity : AppCompatActivity() {
             Log.d(TAG, author)
             Log.d(TAG, reviewtitle)
             Log.d(TAG, rating.toString())
-
-
-            // 파이어베이스 스토리지
-            // 이미지 이름을 문서의 key값으로 해줘서 이미지에 대한 정보를 찾기 쉽게 해놓음
+            Log.d(TAG, genre)
 
             val key = FBRef.boardRef.push().key.toString()
 
             FBRef.boardRef
                 .child(key)
-                .setValue(BoardModel(title, content, uid, time, reviewtitle, author, rating))
+                .setValue(BoardModel(title, content, uid, time, reviewtitle, author, rating, genre))
             Toast.makeText(this, "게시글 입력 완료", Toast.LENGTH_LONG).show()
 
             if (isImageUpload) {
@@ -90,13 +86,10 @@ class BoardWriteActivity : AppCompatActivity() {
             binding.genre14
         )
 
-        // 장르 버튼 선택, 취소 기능
         radioButtons.forEach { setupRadioButton(it, radioButtons) }
     }
 
     private fun imageUpload(key: String) {
-        // Get the data from an ImageView as bytes
-
         val storage = Firebase.storage
         val storageRef = storage.reference
         val mountainsRef = storageRef.child("$key.png")
@@ -111,10 +104,8 @@ class BoardWriteActivity : AppCompatActivity() {
 
         val uploadTask = mountainsRef.putBytes(data)
         uploadTask.addOnFailureListener {
-            // Handle unsuccessful uploads
             Log.d(TAG, "Image upload failed")
         }.addOnSuccessListener { taskSnapshot ->
-            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
             Log.d(TAG, "Image upload successful")
         }
     }

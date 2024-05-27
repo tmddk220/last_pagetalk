@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
@@ -25,72 +26,59 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.lang.Exception
 
-// BoardInsideActivity 클래스 선언
 class BoardInsideActivity : AppCompatActivity() {
 
-    private val TAG = BoardInsideActivity::class.java.simpleName // 로그 태그
-    private lateinit var binding: ActivityBoardInsideBinding // ViewBinding 객체
-    private lateinit var key: String // 게시글 키
-    private val commentDataList = mutableListOf<CommentModel>() // 댓글 데이터 리스트
-    private lateinit var commentAdapter: CommentLVAdapter // 댓글 리스트 뷰 어댑터
+    private val TAG = BoardInsideActivity::class.java.simpleName
+    private lateinit var binding: ActivityBoardInsideBinding
+    private lateinit var key: String
+    private val commentDataList = mutableListOf<CommentModel>()
+    private lateinit var commentAdapter: CommentLVAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-
-        // ViewBinding 설정
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_inside)
 
-        // 설정 아이콘 클릭 리스너 설정
         binding.boardSettingIcon.setOnClickListener {
             showDialog()
         }
 
-        // 인텐트로부터 게시글 키를 가져옴
         key = intent.getStringExtra("key").toString()
-        getBoardData(key) // 게시글 데이터 가져오기
-        getImageData(key) // 게시글 이미지 가져오기
+        getBoardData(key)
+        getImageData(key)
 
-        // 댓글 버튼 클릭 리스너 설정
         binding.commentBtn.setOnClickListener {
             insertComment(key)
         }
 
-        getCommentData(key) // 댓글 데이터 가져오기
-
-        // 댓글 리스트 뷰 어댑터 설정
+        getCommentData(key)
         commentAdapter = CommentLVAdapter(commentDataList)
         binding.commentLV.adapter = commentAdapter
 
     }
 
-    // 댓글 데이터 가져오기
-    fun getCommentData(key: String) {
+    private fun getCommentData(key: String) {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                commentDataList.clear() // 기존 댓글 데이터 삭제
+                commentDataList.clear()
 
-                // Firebase로부터 댓글 데이터를 가져옴
                 for (dataModel in dataSnapshot.children) {
                     val item = dataModel.getValue(CommentModel::class.java)
                     commentDataList.add(item!!)
                 }
 
-                commentAdapter.notifyDataSetChanged() // 어댑터에 데이터 변경 통보
-
+                commentAdapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // 데이터 가져오기 실패 시 로그 메시지 출력
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
         }
         FBRef.commentRef.child(key).addValueEventListener(postListener)
     }
 
-    // 댓글 입력하기
-    fun insertComment(key: String) {
+    private fun insertComment(key: String) {
         FBRef.commentRef
             .child(key)
             .push()
@@ -102,10 +90,9 @@ class BoardInsideActivity : AppCompatActivity() {
             )
 
         Toast.makeText(this, "댓글 입력 완료", Toast.LENGTH_SHORT).show()
-        binding.commentArea.setText("") // 댓글 입력창 초기화
+        binding.commentArea.setText("")
     }
 
-    // 게시글 수정/삭제 다이얼로그 보여주기
     private fun showDialog() {
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
         val mBuilder = AlertDialog.Builder(this)
@@ -128,10 +115,9 @@ class BoardInsideActivity : AppCompatActivity() {
         }
     }
 
-    // 게시글 이미지 가져오기
     private fun getImageData(key: String) {
-        val storageReference = Firebase.storage.reference.child(key + ".png") // 이미지 파일 참조
-        val imageViewFromFB = binding.getImageArea // 이미지 뷰
+        val storageReference = Firebase.storage.reference.child("$key.png")
+        val imageViewFromFB = binding.getImageArea
 
         storageReference.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -139,12 +125,11 @@ class BoardInsideActivity : AppCompatActivity() {
                     .load(task.result)
                     .into(imageViewFromFB)
             } else {
-                binding.getImageArea.isVisible = false // 이미지가 없을 경우 이미지 뷰 숨김
+                binding.getImageArea.isVisible = false
             }
         })
     }
 
-    // 게시글 데이터 가져오기
     private fun getBoardData(key: String) {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -152,12 +137,16 @@ class BoardInsideActivity : AppCompatActivity() {
                     val dataModel = dataSnapshot.getValue(BoardModel::class.java)
                     Log.d(TAG, dataModel!!.title)
 
-                    binding.titleArea.text = dataModel!!.reviewtitle
-                    binding.textArea.text = dataModel!!.content
-                    binding.timeArea.text = dataModel!!.time
-                    binding.authorArea.text = dataModel!!.author
-                    binding.ratingBar.rating = dataModel!!.rating
-                    binding.booktitleArea.text = dataModel!!.title
+                    binding.titleArea.text = dataModel.reviewtitle
+                    binding.textArea.text = dataModel.content
+                    binding.timeArea.text = dataModel.time
+                    binding.authorArea.text = dataModel.author
+                    binding.ratingBar.rating = dataModel.rating
+                    binding.booktitleArea.text = dataModel.title
+
+                    // 추가된 장르 정보 설정
+                    val genre = dataModel.genre
+                    setRadioButtonChecked(genre)
 
                     val myUid = FBAuth.getUid()
                     val writerUid = dataModel.uid
@@ -178,5 +167,31 @@ class BoardInsideActivity : AppCompatActivity() {
             }
         }
         FBRef.boardRef.child(key).addValueEventListener(postListener)
+    }
+
+    private fun setRadioButtonChecked(genre: String) {
+        val radioButtons = listOf(
+            binding.genre1,
+            binding.genre2,
+            binding.genre3,
+            binding.genre4,
+            binding.genre5,
+            binding.genre6,
+            binding.genre7,
+            binding.genre8,
+            binding.genre9,
+            binding.genre10,
+            binding.genre11,
+            binding.genre12,
+            binding.genre13,
+            binding.genre14
+        )
+
+        radioButtons.forEach {
+            if (it.text.toString() == genre) {
+                it.isChecked = true
+                return
+            }
+        }
     }
 }

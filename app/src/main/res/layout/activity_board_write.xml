@@ -76,11 +76,11 @@
                     android:text="  장르"
                     android:textSize="8pt" />
 
-                //장르 라디오버튼
-               /*LinearLayout
+                <!--장르 라디오버튼
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="#000000"/>*/
+                    android:background="#000000"/>-->
 
                 <LinearLayout
                     android:id="@+id/genreGroup1"
