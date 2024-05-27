@@ -78,9 +78,7 @@ class TalkFragment : Fragment() {
             it.findNavController().navigate(R.id.action_talkFragment_to_bookmarkFragment)
         }
 
-        binding.storeTap.setOnClickListener {
-            it.findNavController().navigate(R.id.action_talkFragment_to_storeFragment)
-        }
+
 
         getFBBoardData()
 

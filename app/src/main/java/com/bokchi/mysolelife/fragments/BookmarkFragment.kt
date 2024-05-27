@@ -67,9 +67,7 @@ class BookmarkFragment : Fragment() {
             it.findNavController().navigate(R.id.action_bookmarkFragment_to_talkFragment)
         }
 
-        binding.storeTap.setOnClickListener {
-            it.findNavController().navigate(R.id.action_bookmarkFragment_to_storeFragment)
-        }
+
 
         return binding.root
     }
