@@ -74,7 +74,8 @@ class BoardListLVAdapter(val context: Context, val boardList: MutableList<BoardM
                         .placeholder(R.drawable.iconsplaceholder)
                         .error(R.drawable.iconserror)
                         .into(imageView!!)
-                } else {
+                }
+                else {
                     imageView?.isVisible = false
                 }
             })
