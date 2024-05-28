@@ -26,6 +26,7 @@ class SettingActivity : AppCompatActivity() {
     private lateinit var birthdateTextView: TextView
     private lateinit var phoneTextView: TextView
     private lateinit var database: DatabaseReference
+    private lateinit var editNicknameBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,7 @@ class SettingActivity : AppCompatActivity() {
         nicknameTextView = findViewById(R.id.nicknameText)
         birthdateTextView = findViewById(R.id.birthdateText)
         phoneTextView = findViewById(R.id.phoneText)
+        editNicknameBtn = findViewById(R.id.editNicknameBtn)
 
         val logoutBtn: Button = findViewById(R.id.logoutBtn)
         logoutBtn.setOnClickListener {
@@ -55,6 +57,11 @@ class SettingActivity : AppCompatActivity() {
         val deleteAccountBtn: Button = findViewById(R.id.deleteAccountBtn)
         deleteAccountBtn.setOnClickListener {
             showDeleteAccountDialog()
+        }
+
+        editNicknameBtn.setOnClickListener {
+            val intent = Intent(this, EditNicknameActivity::class.java)
+            startActivity(intent)
         }
 
         // 사용자 정보 불러오기

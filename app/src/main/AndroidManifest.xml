@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MySoleLife">
-        <activity android:name=".setting.SettingActivity"></activity>
+        <activity android:name=".setting.EditNicknameActivity" />
+        <activity android:name=".setting.SettingActivity" />
         <activity android:name=".board.BoardEditActivity" />
         <activity android:name=".board.BoardInsideActivity" />
         <activity android:name=".board.BoardWriteActivity" />
