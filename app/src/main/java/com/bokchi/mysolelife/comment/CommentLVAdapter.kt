@@ -1,16 +1,19 @@
 package com.bokchi.mysolelife.comment
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.bokchi.mysolelife.R
-import com.bokchi.mysolelife.utils.FBAuth
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
-class CommentLVAdapter(val commentList : MutableList<CommentModel>) : BaseAdapter() {
+class CommentLVAdapter(val commentList: MutableList<CommentModel>) : BaseAdapter() {
     override fun getCount(): Int {
         return commentList.size
     }
@@ -23,7 +26,6 @@ class CommentLVAdapter(val commentList : MutableList<CommentModel>) : BaseAdapte
         return position.toLong()
     }
 
-    //+댓글 nickname 불러오기
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view = convertView
 
@@ -33,16 +35,30 @@ class CommentLVAdapter(val commentList : MutableList<CommentModel>) : BaseAdapte
 
         val title = view?.findViewById<TextView>(R.id.titleArea)
         val time = view?.findViewById<TextView>(R.id.timeArea)
-        val nickname = view?.findViewById<TextView>(R.id.nicknameText)
+        val nickname = view?.findViewById<TextView>(R.id.nicknameArea)
 
         title!!.text = commentList[position].commentTitle
         time!!.text = commentList[position].commentCreatedTime
-        //nickname!!.text = commentList[position].commentNickname
+
+        // 닉네임 가져오기
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            val uid = currentUser.uid
+            val database = FirebaseDatabase.getInstance()
+            val userRef = database.getReference("users").child(uid).child("nickname")
+
+            userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val nicknameValue = dataSnapshot.getValue(String::class.java)
+                    nickname?.text = nicknameValue
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Toast.makeText(parent?.context, "사용자 정보를 가져오는 데 실패했습니다: ${databaseError.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
 
         return view!!
     }
-
-
-
-
 }
