@@ -1,5 +1,5 @@
+// MyBoardActivity.kt
 package com.bokchi.mysolelife.board
-//MyBoardActivity.ky
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.bokchi.mysolelife.R
 import com.bokchi.mysolelife.databinding.ActivityMyBoardBinding
+import com.bokchi.mysolelife.utils.FBAuth
 import com.bokchi.mysolelife.utils.FBRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -29,9 +30,9 @@ class MyBoardActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_my_board)
 
         boardRVAdapter = MyBoardListLAVdapter(this, boardDataList, boardKeyList)
-        binding.boardListView.adapter = boardRVAdapter
+        binding.boardGridView.adapter = boardRVAdapter
 
-        binding.boardListView.setOnItemClickListener { parent, view, position, id ->
+        binding.boardGridView.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent(this@MyBoardActivity, BoardInsideActivity::class.java)
             intent.putExtra("key", boardKeyList[position])
             startActivity(intent)
@@ -46,9 +47,11 @@ class MyBoardActivity : AppCompatActivity() {
                 boardDataList.clear()
                 boardKeyList.clear()
 
+                val currentUserUid = FBAuth.getUid()
+
                 for (dataModel in dataSnapshot.children) {
                     val item = dataModel.getValue(BoardModel::class.java)
-                    if (item != null) {
+                    if (item != null && item.uid == currentUserUid) {
                         boardDataList.add(item)
                         boardKeyList.add(dataModel.key.toString())
                     }

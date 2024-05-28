@@ -1,4 +1,4 @@
-//MyBoardListLAVdapter.kt
+// MyBoardListLAVdapter.kt
 package com.bokchi.mysolelife.board
 
 import android.content.Context
@@ -34,12 +34,12 @@ class MyBoardListLAVdapter(
         val view: View = convertView ?: LayoutInflater.from(parent?.context)
             .inflate(R.layout.myboard_list_item, parent, false)
 
-        val itemLinearLayoutView = view?.findViewById<LinearLayout>(R.id.itemView)
-        val title = view?.findViewById<TextView>(R.id.titleArea)
-        val reviewtitle = view?.findViewById<TextView>(R.id.reviewtitleArea)
+        val itemLinearLayoutView = view.findViewById<LinearLayout>(R.id.itemView)
+        val title = view.findViewById<TextView>(R.id.titleArea)
+        val reviewtitle = view.findViewById<TextView>(R.id.reviewtitleArea)
         //val author = view.findViewById<TextView>(R.id.authorArea)
         //val time = view.findViewById<TextView>(R.id.timeArea)
-        val image = view?.findViewById<ImageView>(R.id.getImageArea)
+        val image = view.findViewById<ImageView>(R.id.getImageArea)
 
         if (myboardList[position].uid == FBAuth.getUid()) {
             itemLinearLayoutView?.setBackgroundColor(Color.parseColor("#ffffff"))
