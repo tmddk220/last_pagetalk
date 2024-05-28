@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -35,9 +36,12 @@ android {
         enabled true
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDir 'src/main/jniLibs'
+        }
+    }
 }
-
-apply plugin: 'com.google.gms.google-services'
 
 dependencies {
 
@@ -52,17 +56,22 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Firebase BOM (Bill of Materials) to manage Firebase dependencies
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
+    // Glide for image loading
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
-    implementation 'com.google.firebase:firebase-database-ktx'
-
-    implementation 'com.google.firebase:firebase-storage-ktx'
-
+    // Firebase UI for storage
     implementation 'com.firebaseui:firebase-ui-storage:6.4.0'
 
+    // Google Play services Auth for Google Sign-In
+    implementation 'com.google.android.gms:play-services-auth:20.0.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.3'
 }

@@ -1,18 +1,24 @@
 {
   "project_info": {
     "project_number": "394232644601",
+    "firebase_url": "https://mysolelife-c1daa-default-rtdb.firebaseio.com",
     "project_id": "mysolelife-c1daa",
     "storage_bucket": "mysolelife-c1daa.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:394232644601:android:2142106e0b722988937328",
+        "mobilesdk_app_id": "1:394232644601:android:bbf8ee0961d30c20937328",
         "android_client_info": {
-          "package_name": "com.bokchi.mysolelife"
+          "package_name": "com.bokchi.mypagetalk"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "394232644601-8vcc0hbviu6q2b20elmh49ssar1eoc1f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDAyxgPOq7MM6VsYS_dNFKv48JloDe-gP8"
@@ -20,7 +26,78 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394232644601-8vcc0hbviu6q2b20elmh49ssar1eoc1f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394232644601:android:2142106e0b722988937328",
+        "android_client_info": {
+          "package_name": "com.bokchi.mysolelife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394232644601-6psnj0qasc5888p3t9432g8i9j66jreq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bokchi.mysolelife",
+            "certificate_hash": "6b0e903e9f66486c74783734874109e616ef18ff"
+          }
+        },
+        {
+          "client_id": "394232644601-8vcc0hbviu6q2b20elmh49ssar1eoc1f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAyxgPOq7MM6VsYS_dNFKv48JloDe-gP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394232644601-8vcc0hbviu6q2b20elmh49ssar1eoc1f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394232644601:android:21f9d1d62e63008c937328",
+        "android_client_info": {
+          "package_name": "com.bokchi.pagetalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394232644601-8vcc0hbviu6q2b20elmh49ssar1eoc1f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAyxgPOq7MM6VsYS_dNFKv48JloDe-gP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394232644601-8vcc0hbviu6q2b20elmh49ssar1eoc1f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -2,4 +2,5 @@
     <string name="app_name">MySoleLife</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_web_client_id">394232644601-6psnj0qasc5888p3t9432g8i9j66jreq.apps.googleusercontent.com</string>
 </resources>
