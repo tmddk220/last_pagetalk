@@ -1,5 +1,6 @@
 package com.bokchi.mysolelife.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bokchi.mysolelife.R
+import com.bokchi.mysolelife.board.MyBoardActivity
 import com.bokchi.mysolelife.contentsList.BookmarkRVAdapter
 import com.bokchi.mysolelife.contentsList.ContentModel
 import com.bokchi.mysolelife.databinding.FragmentBookmarkBinding
@@ -34,7 +36,6 @@ class BookmarkFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -46,7 +47,6 @@ class BookmarkFragment : Fragment() {
 
         // 2. 사용자가 북마크한 정보를 다 가져옴!
         getBookmarkData()
-
 
         rvAdapter = BookmarkRVAdapter(requireContext(), items, itemKeyList, bookmarkIdList)
 
@@ -67,7 +67,11 @@ class BookmarkFragment : Fragment() {
             it.findNavController().navigate(R.id.action_bookmarkFragment_to_talkFragment)
         }
 
-
+        // myboardbtn 클릭 시 MyBoardActivity로 이동하는 코드 추가
+        binding.myboardbtn.setOnClickListener {
+            val intent = Intent(requireContext(), MyBoardActivity::class.java)
+            startActivity(intent)
+        }
 
         return binding.root
     }
@@ -87,11 +91,8 @@ class BookmarkFragment : Fragment() {
                         items.add(item!!)
                         itemKeyList.add(dataModel.key.toString())
                     }
-
-
                 }
                 rvAdapter.notifyDataSetChanged()
-
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -101,7 +102,6 @@ class BookmarkFragment : Fragment() {
         }
         FBRef.category1.addValueEventListener(postListener)
         FBRef.category2.addValueEventListener(postListener)
-
     }
 
     private fun getBookmarkData(){
@@ -113,7 +113,6 @@ class BookmarkFragment : Fragment() {
 
                     Log.e(TAG, dataModel.toString())
                     bookmarkIdList.add(dataModel.key.toString())
-
                 }
 
                 // 1. 전체 카테고리에 있는 컨텐츠 데이터들을 다 가져옴!
@@ -126,9 +125,5 @@ class BookmarkFragment : Fragment() {
             }
         }
         FBRef.bookmarkRef.child(FBAuth.getUid()).addValueEventListener(postListener)
-
     }
-
-
-
 }
