@@ -76,6 +76,7 @@ class JoinActivity : AppCompatActivity() {
                                 child("nickname").setValue(nickname)
                                 child("birthdate").setValue(birthdate)
                                 child("phone").setValue(phone)
+                                child("email").setValue(email)
                             }
                         }
 
