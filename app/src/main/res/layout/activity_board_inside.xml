@@ -304,23 +304,27 @@
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:background="@color/white"
-            android:layout_height="60dp">
+            android:layout_height="60dp"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/commentArea"
                 android:hint="댓글을 입력해주세요"
                 android:layout_marginLeft="10dp"
-                android:layout_width="320dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:background="@android:color/transparent"/>
 
             <ImageView
                 android:id="@+id/commentBtn"
                 android:src="@drawable/plusbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginRight="0dp"/>
         </LinearLayout>
+
 
     </RelativeLayout>
 

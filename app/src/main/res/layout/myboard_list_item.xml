@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--myboard_list_item.xml-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/itemView"
     android:layout_width="match_parent"
     android:layout_height="190dp"
-    android:orientation="vertical">
-    <!--width match parent 사이즈 조절 필요할수도 있음-->
+    android:orientation="vertical"
+    android:gravity="center"> <!-- Center alignment added -->
 
     <ImageView
         android:id="@+id/getImageArea"
-        android:layout_width="170dp"
+        android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="0dp"
-        android:layout_marginRight="5dp" />
+        android:layout_marginRight="5dp"
+        android:layout_gravity="center"/> <!-- Center alignment added -->
 
     <TextView
         android:id="@+id/reviewtitleArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="2dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="2dp"
         android:text="reviewtitle"
         android:textColor="@color/black"
-        android:textSize="17sp"
-        android:textStyle="bold" />
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:layout_gravity="left"/> <!-- Center alignment added -->
 
     <TextView
         android:id="@+id/titleArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="0dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="0dp"
         android:text="booktitle"
         android:textColor="@color/black"
-        android:textSize="10sp" />
+        android:textSize="12sp"
+        android:layout_gravity="left"/> <!-- Center alignment added -->
 </LinearLayout>
