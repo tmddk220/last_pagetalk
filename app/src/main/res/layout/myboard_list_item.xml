@@ -2,9 +2,10 @@
 <!--myboard_list_item.xml-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/itemView"
-    android:layout_width="wrap_content"
-    android:layout_height="200dp"
+    android:layout_width="match_parent"
+    android:layout_height="190dp"
     android:orientation="vertical">
+    <!--width match parent 사이즈 조절 필요할수도 있음-->
 
     <ImageView
         android:id="@+id/getImageArea"
