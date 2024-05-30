@@ -2,6 +2,7 @@ package com.bokchi.mysolelife.setting
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -75,8 +76,15 @@ class SettingActivity : AppCompatActivity() {
 
                     // 정보가 null이 아니면 TextView에 표시
                     if (nickname != null) nicknameTextView.text = "닉네임: $nickname"
-                    if (birthdate != null) birthdateTextView.text = "생년월일: $birthdate"
-                    if (phone != null) phoneTextView.text = "휴대폰 번호: $phone"
+
+                    // 구글 계정 로그인 여부 확인 후 생년월일과 휴대폰 번호 가시성 제어
+                    if (auth.currentUser?.providerData?.any { it.providerId == "google.com" } == true) {
+                        birthdateTextView.visibility = View.GONE
+                        phoneTextView.visibility = View.GONE
+                    } else {
+                        if (birthdate != null) birthdateTextView.text = "생년월일: $birthdate"
+                        if (phone != null) phoneTextView.text = "휴대폰 번호: $phone"
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {

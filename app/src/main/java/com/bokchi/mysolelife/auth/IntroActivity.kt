@@ -1,3 +1,5 @@
+// IntroActivity.kt
+
 package com.bokchi.mysolelife.auth
 
 import android.content.Intent
@@ -8,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import com.bokchi.mysolelife.MainActivity
 import com.bokchi.mysolelife.R
 import com.bokchi.mysolelife.databinding.ActivityIntroBinding
+import com.bokchi.mysolelife.setting.SetNicknameActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -92,7 +95,7 @@ class IntroActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, SetNicknameActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                 } else {
