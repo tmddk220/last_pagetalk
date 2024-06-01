@@ -1,6 +1,8 @@
 package com.bokchi.mysolelife
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -17,15 +19,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-//        findViewById<Button>(R.id.logoutBtn).setOnClickListener {
-//
-//            auth.signOut()
-//
-//            val intent = Intent(this, IntroActivity::class.java)
-//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            startActivity(intent)
-//
-//        }
+        // 알림 버튼 클릭 이벤트 추가
+        findViewById<ImageView>(R.id.notificationBtn).setOnClickListener {
+            val intent = Intent(this, NotificationActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
