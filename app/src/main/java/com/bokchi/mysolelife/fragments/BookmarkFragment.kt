@@ -3,19 +3,18 @@ package com.bokchi.mysolelife.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bokchi.mysolelife.R
 import com.bokchi.mysolelife.board.MyBoardActivity
-import com.bokchi.mysolelife.contentsList.BookmarkRVAdapter
 import com.bokchi.mysolelife.contentsList.ContentModel
 import com.bokchi.mysolelife.databinding.FragmentBookmarkBinding
+import com.bokchi.mysolelife.profile.MyBookmarkActivity
+import com.bokchi.mysolelife.setting.SettingActivity
 import com.bokchi.mysolelife.utils.FBAuth
 import com.bokchi.mysolelife.utils.FBRef
 import com.google.firebase.database.DataSnapshot
@@ -32,8 +31,6 @@ class BookmarkFragment : Fragment() {
     val items = ArrayList<ContentModel>()
     val itemKeyList = ArrayList<String>()
 
-    lateinit var rvAdapter : BookmarkRVAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -45,16 +42,10 @@ class BookmarkFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bookmark, container, false)
 
-        // 2. 사용자가 북마크한 정보를 다 가져옴!
+        // 사용자가 북마크한 정보를 가져옴
         getBookmarkData()
 
-        rvAdapter = BookmarkRVAdapter(requireContext(), items, itemKeyList, bookmarkIdList)
-
-        val rv : RecyclerView = binding.bookmarkRV
-        rv.adapter = rvAdapter
-
-        rv.layoutManager = GridLayoutManager(requireContext(), 2)
-
+        // 탭 클릭 이벤트 처리
         binding.homeTap.setOnClickListener {
             it.findNavController().navigate(R.id.action_bookmarkFragment_to_homeFragment)
         }
@@ -73,6 +64,18 @@ class BookmarkFragment : Fragment() {
             startActivity(intent)
         }
 
+        // myprofilebtn 클릭 시 SettingActivity로 이동하는 코드 추가
+        binding.myprofilebtn.setOnClickListener {
+            val intent = Intent(requireContext(), SettingActivity::class.java)
+            startActivity(intent)
+        }
+
+        // mybookmarkbtn 클릭 시 MyBookmarkActivity로 이동하는 코드 추가
+        binding.mybookmarkbtn.setOnClickListener {
+            val intent = Intent(requireContext(), MyBookmarkActivity::class.java)
+            startActivity(intent)
+        }
+
         return binding.root
     }
 
@@ -86,13 +89,12 @@ class BookmarkFragment : Fragment() {
                     Log.d(TAG, dataModel.toString())
                     val item = dataModel.getValue(ContentModel::class.java)
 
-                    // 3. 전체 컨텐츠 중에서, 사용자가 북마크한 정보만 보여줌!
+                    // 전체 컨텐츠 중에서, 사용자가 북마크한 정보만 보여줌
                     if (bookmarkIdList.contains(dataModel.key.toString())){
                         items.add(item!!)
                         itemKeyList.add(dataModel.key.toString())
                     }
                 }
-                rvAdapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -115,7 +117,7 @@ class BookmarkFragment : Fragment() {
                     bookmarkIdList.add(dataModel.key.toString())
                 }
 
-                // 1. 전체 카테고리에 있는 컨텐츠 데이터들을 다 가져옴!
+                // 전체 카테고리에 있는 컨텐츠 데이터들을 다 가져옴
                 getCategoryData()
             }
 

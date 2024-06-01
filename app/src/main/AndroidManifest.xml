@@ -33,6 +33,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".auth.FindIdActivity" />
         <activity android:name=".auth.FindPasswordActivity" />
+        <activity android:name=".profile.MyBookmarkActivity" />
     </application>
 
 </manifest>
