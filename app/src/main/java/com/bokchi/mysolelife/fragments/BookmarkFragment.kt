@@ -43,7 +43,6 @@ class BookmarkFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bookmark, container, false)
 
-        // 사용자가 북마크한 정보를 가져옴
         getBookmarkData()
 
         // 탭 클릭 이벤트 처리
