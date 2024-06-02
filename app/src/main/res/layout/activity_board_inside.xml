@@ -27,16 +27,17 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/titleArea"
+                            android:id="@+id/titleArea2"
                             android:text="title"
                             android:textColor="@color/black"
-                            android:textSize="20sp"
+                            android:textSize="15dp"
                             android:textStyle="bold"
                             android:layout_width="match_parent"
                             android:layout_marginRight="50dp"
                             android:layout_marginLeft="50dp"
                             android:layout_height="match_parent"
                             android:gravity="center"/>
+
 
                         <ImageView
                             android:id="@+id/boardSettingIcon"
@@ -62,6 +63,7 @@
                 <TextView
                     android:id="@+id/timeArea"
                     android:text="time"
+                    android:textSize="5pt"
                     android:layout_width="match_parent"
                     android:gravity="right"
                     android:layout_margin="5dp"
@@ -76,11 +78,25 @@
                     android:layout_marginRight="20dp" />
 
                 <TextView
-                    android:id="@+id/booktitleArea"
+                    android:id="@+id/titleArea"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/background_radius"
+                    android:padding="10dp"
+                    android:text="리뷰 제목 내용"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+
+
+                <TextView
+                    android:id="@+id/booktitleArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/background_radius"
                     android:padding="10dp"
@@ -91,7 +107,7 @@
                     android:id="@+id/authorArea"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/background_radius"
@@ -99,9 +115,9 @@
                     android:text="저자 내용"
                     android:textColor="@color/black" />
 
-               <!--
-                장르부터 별점까지는 boardwrite부분 그대로 복붙해와서 추후 수정해야할 수 있음
-                -->
+                <!--
+                 장르부터 별점까지는 boardwrite부분 그대로 복붙해와서 추후 수정해야할 수 있음
+                 -->
 
                 <TextView
                     android:layout_width="match_parent"
@@ -110,7 +126,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:text="  장르"
-                    android:textSize="8pt" />
+                    android:textSize="6pt" />
 
                 <LinearLayout
                     android:id="@+id/genreGroup1"
@@ -263,19 +279,20 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:text="  별점"
-                    android:textSize="8pt" />
+                    android:textSize="6pt" />
 
                 <RatingBar
                     android:id="@+id/ratingBar"
-                    android:clickable="false"
-                    android:focusable="false"
                     android:layout_width="242dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     app:layout_constraintStart_toEndOf="@+id/ratingstar"
-                    app:layout_constraintTop_toBottomOf="@+id/writeAuhor" />
+                    app:layout_constraintTop_toBottomOf="@+id/writeAuhor"
+                    android:clickable="false"
+                    android:focusable="false" />
+
 
 
                 <TextView
@@ -304,27 +321,23 @@
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:background="@color/white"
-            android:layout_height="60dp"
-            android:orientation="horizontal">
+            android:layout_height="60dp">
 
             <EditText
                 android:id="@+id/commentArea"
                 android:hint="댓글을 입력해주세요"
                 android:layout_marginLeft="10dp"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@android:color/transparent"/>
 
             <ImageView
                 android:id="@+id/commentBtn"
                 android:src="@drawable/plusbtn"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
-                android:layout_marginRight="0dp"/>
-        </LinearLayout>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -1,5 +1,5 @@
 package com.bokchi.mysolelife.board
-//BoardInsideActivity
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -38,6 +38,11 @@ class BoardInsideActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_inside)
+
+        disableAllRadioButtons()
+
+        // RatingBar 클릭 방지를 위해 setOnTouchListener를 사용
+        binding.ratingBar.setOnTouchListener { _, _ -> true }
 
         binding.boardSettingIcon.setOnClickListener {
             showDialog()
@@ -132,12 +137,11 @@ class BoardInsideActivity : AppCompatActivity() {
                     Log.d(TAG, dataModel!!.title)
 
                     binding.titleArea.text = dataModel.reviewtitle
+                    binding.titleArea2.text = dataModel.reviewtitle
                     binding.textArea.text = dataModel.content
                     binding.timeArea.text = dataModel.time
                     binding.authorArea.text = dataModel.author
                     binding.ratingBar.rating = dataModel.rating
-                    binding.ratingBar.isClickable = false
-                    binding.booktitleArea.text = dataModel.title
 
                     // 수정된 부분: 장르 정보를 새로운 정보로 설정하고, 클릭 방지
                     val genre = dataModel.genre
@@ -181,6 +185,28 @@ class BoardInsideActivity : AppCompatActivity() {
             }
         }
         radioButton.isClickable = false // 클릭 방지
+    }
+
+
+    private fun disableAllRadioButtons() {
+        val radioButtons = listOf(
+            binding.genre1,
+            binding.genre2,
+            binding.genre3,
+            binding.genre4,
+            binding.genre5,
+            binding.genre6,
+            binding.genre7,
+            binding.genre8,
+            binding.genre9,
+            binding.genre10,
+            binding.genre11,
+            binding.genre12,
+            binding.genre13,
+            binding.genre14
+        )
+
+        radioButtons.forEach { it.isClickable = false }
     }
 
     private fun setRadioButtonChecked(genre: String) {
