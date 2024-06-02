@@ -64,11 +64,12 @@
                     android:src="@drawable/icon_find" />
 
                 <ImageView
-                    android:id="@+id/talkTap"
+                    android:id="@+id/writeBtn"
+                    android:src="@drawable/icon_write"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/icon_write" />
+                    android:layout_marginBottom="10dp"/>
 
                 <ImageView
                     android:id="@+id/bookmarkTap"

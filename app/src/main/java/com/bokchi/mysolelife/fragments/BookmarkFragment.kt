@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.bokchi.mysolelife.R
+import com.bokchi.mysolelife.board.BoardWriteActivity
 import com.bokchi.mysolelife.board.MyBoardActivity
 import com.bokchi.mysolelife.contentsList.ContentModel
 import com.bokchi.mysolelife.databinding.FragmentBookmarkBinding
@@ -47,16 +48,20 @@ class BookmarkFragment : Fragment() {
 
         // 탭 클릭 이벤트 처리
         binding.homeTap.setOnClickListener {
-            it.findNavController().navigate(R.id.action_bookmarkFragment_to_homeFragment)
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_talkFragment)
         }
 
         binding.tipTap.setOnClickListener {
             it.findNavController().navigate(R.id.action_bookmarkFragment_to_tipFragment)
         }
-
-        binding.talkTap.setOnClickListener {
-            it.findNavController().navigate(R.id.action_bookmarkFragment_to_talkFragment)
+        binding.writeBtn.setOnClickListener {
+            val intent = Intent(context, BoardWriteActivity::class.java)
+            startActivity(intent)
         }
+
+        /*binding.talkTap.setOnClickListener {
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_homeFragment)
+        }*/
 
         // myboardbtn 클릭 시 MyBoardActivity로 이동하는 코드 추가
         binding.myboardbtn.setOnClickListener {

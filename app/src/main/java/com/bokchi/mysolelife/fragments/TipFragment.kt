@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bokchi.mysolelife.R
+import com.bokchi.mysolelife.board.BoardWriteActivity
 import com.bokchi.mysolelife.contentsList.ContentListActivity
 import com.bokchi.mysolelife.databinding.FragmentTipBinding
 
@@ -29,6 +30,11 @@ class TipFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tip, container, false)
 
+
+
+
+
+
         binding.category1.setOnClickListener {
 
             val intent = Intent(context, ContentListActivity::class.java)
@@ -44,13 +50,18 @@ class TipFragment : Fragment() {
 
         }
 
-        binding.homeTap.setOnClickListener {
-            it.findNavController().navigate(R.id.action_tipFragment_to_homeFragment)
+        binding.writeBtn.setOnClickListener {
+            val intent = Intent(context, BoardWriteActivity::class.java)
+            startActivity(intent)
         }
 
-        binding.talkTap.setOnClickListener {
+        binding.homeTap.setOnClickListener {
             it.findNavController().navigate(R.id.action_tipFragment_to_talkFragment)
         }
+
+        /*binding.talkTap.setOnClickListener {
+            it.findNavController().navigate(R.id.action_tipFragment_to_homeFragment)
+        }*/
 
         binding.bookmarkTap.setOnClickListener {
             it.findNavController().navigate(R.id.action_tipFragment_to_bookmarkFragment)

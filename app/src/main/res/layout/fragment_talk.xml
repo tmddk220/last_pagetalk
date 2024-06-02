@@ -24,18 +24,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/mainColor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,21 +55,13 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
 
-            <!--
             <ImageView
                 android:id="@+id/homeTap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/icon_home" />-->
+                android:src="@drawable/icon_home" />
 
-            <ImageView
-                android:id="@+id/writeBtn"
-                android:src="@drawable/plusbtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginBottom="10dp"/>
             <ImageView
                 android:id="@+id/tipTap"
                 android:layout_width="match_parent"
@@ -77,11 +70,12 @@
                 android:src="@drawable/icon_find" />
 
             <ImageView
-                android:id="@+id/talkTap"
+                android:id="@+id/writeBtn"
+                android:src="@drawable/icon_write"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/icon_write" />
+                android:layout_marginBottom="10dp"/>
 
             <ImageView
                 android:id="@+id/bookmarkTap"
