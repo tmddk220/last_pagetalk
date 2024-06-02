@@ -31,7 +31,6 @@
                             android:text="title"
                             android:textColor="@color/black"
                             android:textSize="15dp"
-                            android:textStyle="bold"
                             android:layout_width="match_parent"
                             android:layout_marginRight="50dp"
                             android:layout_marginLeft="50dp"
@@ -77,19 +76,19 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp" />
 
+
                 <TextView
                     android:id="@+id/titleArea"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="0dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="0dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/background_radius"
                     android:padding="10dp"
                     android:text="리뷰 제목 내용"
-                    android:textStyle="bold"
-                    android:textColor="@color/black" />
-
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/booktitleArea"

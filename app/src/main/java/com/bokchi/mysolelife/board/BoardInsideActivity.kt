@@ -138,6 +138,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
                     binding.titleArea.text = dataModel.reviewtitle
                     binding.titleArea2.text = dataModel.reviewtitle
+                    binding.booktitleArea.text = dataModel.title
                     binding.textArea.text = dataModel.content
                     binding.timeArea.text = dataModel.time
                     binding.authorArea.text = dataModel.author

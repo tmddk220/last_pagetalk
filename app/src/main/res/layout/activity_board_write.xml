@@ -74,7 +74,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:text="  장르"
-                    android:textSize="8pt" />
+                    android:textSize="6pt" />
 
                 <!--장르 라디오버튼
                 <LinearLayout
@@ -235,7 +235,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:text="  별점"
-                    android:textSize="8pt" />
+                    android:textSize="6pt" />
 
 
                 <RatingBar
