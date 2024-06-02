@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bokchi.mysolelife.R
+import com.bokchi.mysolelife.board.BoardModel
 import com.bokchi.mysolelife.utils.FBAuth
 import com.bokchi.mysolelife.utils.FBRef
 import com.bumptech.glide.Glide
@@ -39,7 +40,7 @@ class ContentRVAdapter(val context : Context,
 
     inner class Viewholder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(item : ContentModel, key : String) {
+        fun bindItems(item: ContentModel, key: String) {
 
             itemView.setOnClickListener {
                 Toast.makeText(context, item.title, Toast.LENGTH_LONG).show()

@@ -42,6 +42,8 @@ class TalkFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_talk, container, false)
 
+        val bookmarkIdList = mutableListOf<String>()
+
         // Context를 전달하면서 BoardListLVAdapter 초기화
         boardRVAdapter = BoardListLVAdapter(requireContext(), boardDataList, boardKeyList)
         binding.boardListView.adapter = boardRVAdapter
