@@ -1,3 +1,4 @@
+// BoardListLVAdapter.kt
 package com.bokchi.mysolelife.board
 
 import android.content.Context
@@ -14,7 +15,6 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import com.bokchi.mysolelife.R
 import com.bokchi.mysolelife.contentsList.BookmarkModel
-import com.bokchi.mysolelife.contentsList.ContentRVAdapter
 import com.bokchi.mysolelife.utils.FBAuth
 import com.bokchi.mysolelife.utils.FBRef
 import com.bumptech.glide.Glide
@@ -33,6 +33,11 @@ class BoardListLVAdapter(
 
     val bookmarkIdList = mutableListOf<String>()
 
+    init {
+        // 어댑터가 생성될 때 북마크 데이터를 불러옴
+        getBookmarkData()
+    }
+
     override fun getCount(): Int {
         return boardList.size
     }
@@ -44,8 +49,6 @@ class BoardListLVAdapter(
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
-
-    lateinit var lvAdapter: BoardListLVAdapter
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view = convertView
@@ -65,9 +68,8 @@ class BoardListLVAdapter(
         val time = view?.findViewById<TextView>(R.id.timeArea)
         val image = view?.findViewById<ImageView>(R.id.getImageArea)
         val bookmarkArea = view?.findViewById<ImageView>(R.id.bookmarkArea)
-        lvAdapter = BoardListLVAdapter(context, boardList, boardKeyList)
 
-        //내가 쓴 글 background color 설정
+        // 내가 쓴 글 background color 설정
         if (boardList[position].uid == FBAuth.getUid()) {
             itemLinearLayoutView?.setBackgroundColor(Color.parseColor("#ffffff"))
         }
@@ -83,18 +85,9 @@ class BoardListLVAdapter(
 
         if (bookmarkIdList.contains(boardKeyList[position])) {
             bookmarkArea?.setImageResource(R.drawable.bookmark_color)
-        }
-        else {
+        } else {
             bookmarkArea?.setImageResource(R.drawable.bookmark_white)
         }
-
-        /*bookmarkArea?.setOnClickListener {
-            Log.d("BoardListLVAdapter", FBAuth.getUid())
-            Toast.makeText(context, boardKeyList[position], Toast.LENGTH_SHORT).show()
-
-            FBRef.bookmarkRef.child(FBAuth.getUid()).child(boardKeyList[position])
-                .setValue(BookmarkModel(true))
-        }*/
 
         bookmarkArea?.setOnClickListener {
             val isBookmarked = bookmarkIdList.contains(boardKeyList[position])
@@ -114,29 +107,26 @@ class BoardListLVAdapter(
             }
         }
 
-
         return view!!
     }
 
     private fun getBookmarkData() {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
+                bookmarkIdList.clear()
                 for (dataModel in dataSnapshot.children) {
                     bookmarkIdList.add(dataModel.key.toString())
                 }
                 Log.d("BoardListLVAdapter", bookmarkIdList.toString())
-                lvAdapter.notifyDataSetChanged()
-
+                notifyDataSetChanged() // 북마크 데이터가 변경되었을 때 어댑터를 새로고침
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Getting Post failed, log a message
-                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
+                Log.w("BoardListLVAdapter", "loadPost:onCancelled", databaseError.toException())
             }
         }
         FBRef.bookmarkRef.child(FBAuth.getUid()).addValueEventListener(postListener)
-
     }
 
     // 이미지 다운로드 및 표시
@@ -154,11 +144,6 @@ class BoardListLVAdapter(
                     imageView?.setImageResource(R.drawable.iconsbook1) // 이미지 로드 실패 시 에러 이미지 표시
                     imageView?.isVisible = true
                 }
-                /* 아래 코드로 바꾸면 로딩중 사진 표시 잘됨
-                else {
-                    imageView?.isVisible = false
-                }
-                 */
             })
         }
     }
